@@ -30,11 +30,21 @@ class Movie(db.Model):
 
     __tablename__ = "movie"
 
-    movie_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    email = db.Column(db.String(64), nullable=True)
-    password = db.Column(db.String(64), nullable=True)
-    age = db.Column(db.Integer, nullable=True)
-    zipcode = db.Column(db.String(15), nullable=True)    
+    movie_id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(64), nullable=True)
+    released_at = db.Column(db.DateTime, nullable=True)
+    imdb_url = db.Column(db.String(64), nullable=True)
+
+
+class Rating(db.Model):
+    """hold the information form data files"""
+
+    __tablename__ = "rating"
+
+    rating_id = db.Column(db.Integer, primary_key=True)
+    movie_id = db.Column(db.Integer, nullable=True)
+    user_id = db.Column(db.Integer, nullable=True)
+    score = db.Column(db.Integer, nullable=True)
 
 
 ##############################################################################

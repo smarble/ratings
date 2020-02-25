@@ -36,6 +36,26 @@ def load_users():
 
 def load_movies():
     """Load movies from u.item into database."""
+    print("movie")
+
+    # Delete all rows in table, so if we need to run this a second time,
+    # we won't be trying to add duplicate users
+    User.query.delete()
+
+    # Read u.user file and insert data
+    for row in open("seed_data/u.item"):
+        row = row.rstrip()
+        movie_id, title, released_at, imdb_url = row.split("|")
+
+        user = User(user_id=user_id,
+                    age=age,
+                    zipcode=zipcode)
+
+        # We need to add to the session or it won't ever be stored
+        db.session.add(user)
+
+    # Once we're done, we should commit our work
+    db.session.commit()
 
 
 def load_ratings():
